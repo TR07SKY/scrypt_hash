@@ -3,7 +3,7 @@ from distutils.core import setup, Extension
 ltc_scrypt_module = Extension('ltc_scrypt',
                               sources=['./scryptmodule.c',
                                        './scrypt.c'],
-                              include_dirs=['./ltc_scrypt'])
+                              include_dirs=['./'])
 
 setup(name='ltc_scrypt',
       version='1.0',
