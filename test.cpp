@@ -19,17 +19,23 @@ int main(void)
     uint256 scrypthash;
 
     const uint32_t N = 1024;
-    const uint32_t r = 32;
+    const uint32_t r = 2048;
     const uint32_t p = 1;
 
-    char sp_size[63 + (128 * r * p) + (256 * r + 64) + (128 * r * N)];
+    char* sp_size = (char*)malloc(sizeof(char)*(63 + (128 * r * p) + (256 * r + 64) + (128 * r * N)));
+    //unsigned char sp_size[63 + (128 * r * p) + (256 * r + 64) + (128 * r * N)];
 
     printf("Random hex: %s\n", str);
+    printf("N: %u\n", N);
+    printf("r: %u\n", r);
+    printf("p: %u\n", p);
+    printf("Scratchpad size: %lu\n", 63 + (128 * r * p) + (256 * r + 64) + (128 * r * N));
     printf("Memory usage: %u MB\n", ((128 * N * r * p) / 1024) / 1024);
 
     scrypt_custom_256((const char*)&str[0], BEGIN(scrypthash), sp_size, N, r, p);
 
-    printf("%lx\n", scrypthash);
+    printf("Scrypt output: %x\n", scrypthash);
 
+    free(sp_size);
 	return 0;
 }
